@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2D JavaScript Game</title>
+    <style>
+      canvas {
+        border: 2px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script>
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+
+      const player = {
+        x: 50,
+        y: 50,
+        speed: 5,
+      };
+
+      function drawPlayer() {
+        ctx.fillStyle = "blue";
+        ctx.fillRect(player.x, player.y, 20, 20);
+      }
+
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      function update() {
+        clearCanvas();
+        drawPlayer();
+      }
+
+      function gameLoop() {
+        requestAnimationFrame(gameLoop);
+        update();
+      }
+
+      gameLoop();
+
+      document.addEventListener("keydown", function (event) {
+        const keyCode = event.keyCode;
+        if (keyCode === 37) {
+          player.x -= player.speed;
+        } else if (keyCode === 38) {
+          player.y -= player.speed;
+        } else if (keyCode === 39) {
+          player.x += player.speed;
+        } else if (keyCode === 40) {
+          player.y += player.speed;
+        }
+      });
+    </script>
+  </body>
+</html>
